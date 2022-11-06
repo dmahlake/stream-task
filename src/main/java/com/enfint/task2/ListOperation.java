@@ -1,31 +1,23 @@
 package com.enfint.task2;
 
-
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
-import static java.util.Arrays.asList;
 
 public class ListOperation {
 
+    private String regex1 = "^[A-Z][a-z]{2,}(?: [A-Z][a-z]*)*$";
     public int integerSum(List<String> input) {
         // TODO: task2
 
-        StringBuffer stringBuffer = new StringBuffer();
-        for (String ab : input){
-            stringBuffer.append(ab);
-            stringBuffer.append(" ");
-        }
+        if (input == null)
+            return 0;
 
-        String str = stringBuffer.toString();
-
-        int sum = Arrays.stream(str.split(" "))
-                .filter(x -> x.matches("\\d+"))
+        return input.stream()
+                .filter(Objects::nonNull)
+                .filter(items -> items.matches(regex1))
                 .mapToInt(Integer::parseInt)
                 .sum();
 
-        return sum < 0 ? null : sum;
     }
 }
